@@ -1,2 +1,4 @@
 # ryp-01
-ALUMNO : Suarez PAvicich Maria Luana
+ Alumno : Suarez Pavicich Maria Luana
+ Curso : 7mo 1ra avc
+ Materia : Redes y protocolos

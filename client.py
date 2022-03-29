@@ -2,12 +2,14 @@
 import socket
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 8000
-HEADER= 1024
-client=socket.socket()
+HEADER= 0
+
+client = socket.socket()
 client.connect((IP, PORT))
+print(f"[CONNECTED] Conectado al servidor en {IP}")
 while True:
   msg= input("Ingrese un mensaje:")
-  length = len(msg)
+  len(msg)
   msg_length = f"´{length}"
   msg_length +="" *(HEADER-len(msg_length))
   client.send(msg_legth.encode("utf-8"))

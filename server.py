@@ -1,22 +1,24 @@
-import socket as s
+import socket
+import json
+from datetime import datetime
 
-IP = s.gethostbyname(s.gethostname())
+
+IP = socket.gethostbyname(socket.gethostname())
 PORT = 8000
 HEADER = 1024
 
-server= s.socket()
-server.bind((IP,PORT))
+server = socket.socket()
+server.bind((IP, PORT))
 server.listen()
-print(f"[LISTENGING] El servidor esta esperando conexiones en {IP}")
+print(f"[LISTENING] El servidor esta esperando conexiones en {IP}")
 
-conn, add = server.accept()
-connected= True
-print (f"nueva coneccion{add}")
+conn, addr = server.accept()
+print(f"[CONNECTED] Nueva conexion en {addr}")
 
-while connected:
-    encoded=conn.recv(HEADER)
-    msg=encoded.decode("utf-8")
-    mensaje=conn.recv(msg).decode("utf-8")
-    print(f"[CLIENT]Recibi:{mensaje}")
-    if mensaje == "close" :
-            break
+while True:
+  
+  header = conn.recv(HEADER).decode("utf-8")
+  header= json.loads(header)
+  msg_len=header["length"]
+  msg = conn.recv(msg_len).decode("utf-8")
+  print(f"{header['from']} a las {header['timestamp']} dice {msg}")
